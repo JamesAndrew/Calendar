@@ -29,7 +29,7 @@ while loop:
         
     elif option == "1":
         print("schedule")
-        e = event_class.Event()
+        e = event_class.Event(n.get_node_id)
         n.insert(e)
         e.set_time = n.get_time()
         c.schedule(e)
