@@ -84,5 +84,5 @@ class Node:
 
         msg = qr.receive_messages()
         if len(msg) > 0:
-            print(msg[0].getbody)
+            print(msg[0].getbody())
 
