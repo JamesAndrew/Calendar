@@ -76,12 +76,13 @@ class Node:
 
     def receive(self, sqs):
         if self.node == 0:
-            q = sqs.get_queue_by_name(QueueName='node0')
+            qr = sqs.get_queue_by_name(QueueName='node0')
         elif self.node == 1:
-            q = sqs.get_queue_by_name(QueueName='node1')
+            qr = sqs.get_queue_by_name(QueueName='node1')
         else:
             print("wahhh, I don't have a queue!")
 
-        msg = q.receive_messages()
-        print(msg.MessageBody)
+        msg = qr.receive_messages()
+        if len(msg) > 0:
+            print(msg[0].getbody)
 
