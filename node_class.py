@@ -83,5 +83,5 @@ class Node:
             print("wahhh, I don't have a queue!")
 
         msg = q.receive_messages()
-        print(msg)
+        print(msg.MessageBody)
 
