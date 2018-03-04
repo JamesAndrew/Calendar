@@ -1,6 +1,7 @@
 import node_class
 import event_class
 import calendar_class
+import boto3
     
 # the start of calendar app
 print("Calendar start")
@@ -8,6 +9,9 @@ print("Calendar start")
 # create node and calendar
 n = node_class.Node()
 c = calendar_class.Calendar()
+
+# use sqs service
+sqs = boto3.resource('sqs')
 
 # main loop of calendar app
 loop = True
@@ -27,6 +31,7 @@ while loop:
         print("schedule")
         e = event_class.Event()
         n.insert(e)
+        e.set_time = n.get_time()
         c.schedule(e)
         
     elif option == "2":
@@ -44,3 +49,5 @@ while loop:
         print("invalid option, please try again")
 
     n.node_properties()
+    n.send(sqs, 1)
+    n.receive(sqs)

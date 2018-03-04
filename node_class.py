@@ -34,6 +34,15 @@ class Node:
             print(item, end=' ')
         print()
 
+    def get_node_id(self):
+        return self.node
+
+    def get_time(self):
+        return self.clock
+
+    def hasrec(e, k):
+        return self.T[k][e.get_node()] >= e.get_time()
+
     def advance_clock(self):
         self.clock += 1
         return self.clock
@@ -54,3 +63,25 @@ class Node:
             else:
                 print("Appointment not found")
                 return False
+
+    def send(self, sqs, k):
+        if k == 0:
+            q = sqs.get_queue_by_name(QueueName='node0')
+        elif k == 1:
+            q = sqs.get_queue_by_name(QueueName='node1')
+        else:
+            print("...and it exploded")
+
+        response = q.send_message(MessageBody='hi node ' + str(k) + ', how is it hanging?')         
+
+    def receive(self, sqs):
+        if self.node == 0:
+            q = sqs.get_queue_by_name(QueueName='node0')
+        elif self.node == 1:
+            q = sqs.get_queue_by_name(QueueName='node1')
+        else:
+            print("wahhh, I don't have a queue!")
+
+        msg = q.receive_messages()
+        print(msg)
+
