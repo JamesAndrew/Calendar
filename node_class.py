@@ -47,10 +47,13 @@ class Node:
         self.clock += 1
         return self.clock
 
-    def insert(self, x):        
+    def insert(self, sqs, x):        
         self.T[self.node][self.node] = self.advance_clock()
         self.PL.append("insert(" + x.name + "), " + str(self.T[self.node][self.node]) + ", " + str(self.node))
         self.V.append(x)
+
+        if len(x.part) > 0
+            self.send(sqs, x.part[0], "schedule", x)
 
     def delete(self, x):
         self.T[self.node][self.node] = self.advance_clock()
@@ -64,7 +67,7 @@ class Node:
                 print("Appointment not found")
                 return False
 
-    def send(self, sqs, k):
+    def send(self, sqs, k, m, e):
         if k == 0:
             q = sqs.get_queue_by_name(QueueName='node0')
         elif k == 1:
@@ -72,7 +75,9 @@ class Node:
         else:
             print("...and it exploded")
 
-        response = q.send_message(MessageBody='hi node ' + str(k) + ', how is it hanging?')         
+        
+
+        response = q.send_message(MessageBody=str(m))         
 
     def receive(self, sqs):
         if self.node == 0:
@@ -80,7 +85,7 @@ class Node:
         elif self.node == 1:
             qr = sqs.get_queue_by_name(QueueName='node1')
         else:
-            print("wahhh, I don't have a queue!")
+            print("I don't have a queue!")
 
         msg = qr.receive_messages()
         if len(msg) > 0:
