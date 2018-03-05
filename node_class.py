@@ -52,7 +52,7 @@ class Node:
         self.PL.append("insert(" + x.name + "), " + str(self.T[self.node][self.node]) + ", " + str(self.node))
         self.V.append(x)
 
-        if len(x.part) > 0
+        if len(x.part) > 0:
             self.send(sqs, x.part[0], "schedule", x)
 
     def delete(self, x):
