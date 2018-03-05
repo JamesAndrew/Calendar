@@ -74,9 +74,7 @@ class Node:
             q = sqs.get_queue_by_name(QueueName='node1')
         else:
             print("...and it exploded")
-
-        
-
+     
         response = q.send_message(MessageBody=str(m))         
 
     def receive(self, sqs):
