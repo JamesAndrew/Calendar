@@ -75,9 +75,11 @@ class Node:
         else:
             print("...and it exploded")
      
-        response = q.send_message(MessageBody=str(m))         
+        response = q.send_message(MessageBody=m)         
 
     def receive(self, sqs):
+        
+        
         if self.node == 0:
             qr = sqs.get_queue_by_name(QueueName='node0')
         elif self.node == 1:
