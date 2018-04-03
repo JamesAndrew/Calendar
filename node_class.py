@@ -68,6 +68,7 @@ class Node:
                 return False
 
     def send(self, sqs, k, m, e):
+        q = 0
         if k == 0:
             q = sqs.get_queue_by_name(QueueName='node0')
         elif k == 1:
@@ -78,8 +79,7 @@ class Node:
         response = q.send_message(MessageBody=m)         
 
     def receive(self, sqs):
-        
-        
+        qr = 0        
         if self.node == 0:
             qr = sqs.get_queue_by_name(QueueName='node0')
         elif self.node == 1:
