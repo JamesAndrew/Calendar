@@ -70,15 +70,7 @@ class Node:
                 return False
 
     def send(self, sqs, k, m, e):
-        q = boto3.resource('sqs')
-        if k == 0:
-            q = sqs.get_queue_by_name(QueueName='node0')
-        elif k == 1:
-            q = sqs.get_queue_by_name(QueueName='node1')
-        else:
-            print("...and it exploded")
-     
-        q.send_message(MessageBody=m)         
+        sqs.get_queue_by_name(QueueName='node' + str(k)).send_message(MessageBody=m)         
 
     def receive(self, sqs):
         q = boto3.resource('sqs')       
