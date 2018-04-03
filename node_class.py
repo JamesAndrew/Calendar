@@ -88,6 +88,6 @@ class Node:
             print("I don't have a queue!")
 
         msg = qr.receive_messages()
-        if len(msg) > 0:
-            print(msg[0].body)
+        for message in messages:
+            print(message.body)
 
