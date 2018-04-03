@@ -78,7 +78,7 @@ class Node:
         else:
             print("...and it exploded")
      
-        msg = q.send_message(MessageBody=m)         
+        q.send_message(MessageBody=m)         
 
     def receive(self, sqs):
         q = boto3.resource('sqs')       
