@@ -51,7 +51,7 @@ class Node:
 
     def insert(self, sqs, x):        
         self.T[self.node][self.node] = self.advance_clock()
-        self.PL.append("insert(" + x.name + "), " + str(self.T[self.node][self.node]) + ", " + str(self.node))
+        self.PL.append("insert," + x.name + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
         self.V.append(x)
 
         if len(x.part) > 0:
@@ -59,7 +59,7 @@ class Node:
 
     def delete(self, x):
         self.T[self.node][self.node] = self.advance_clock()
-        self.PL.append("delete(" + x + "), " + str(self.T[self.node][self.node]) + ", " + str(self.node))
+        self.PL.append("delete," + x + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
         for item in self.V[:]:
             if item.name == x:
                 self.V.remove(item)
@@ -70,7 +70,10 @@ class Node:
                 return False
 
     def send(self, sqs, k, m, e):
-        sqs.get_queue_by_name(QueueName='node' + str(k)).send_message(MessageBody=m)         
+        for item in self.PL:
+            s = item.split(",")
+            if e.name == s[1] and !self.hasrec(e, k)
+                sqs.get_queue_by_name(QueueName='node' + str(k)).send_message(MessageBody=m)         
 
     def receive(self, sqs):
         q = boto3.resource('sqs')       
