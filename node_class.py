@@ -84,7 +84,8 @@ class Node:
         NE = ""
         if !self.hasrec(m[1], self.node)
             NE = m[1]
-        
+        #for item in self.V[:]:
+            
 
         
 
