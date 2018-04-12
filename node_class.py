@@ -73,7 +73,7 @@ class Node:
     def send(self, sqs, k, m, e):
         for item in self.PL:
             s = item.split(",")
-            if e.name == s[1] and !self.hasrec(e, k)
+            if e.name == s[1] and !self.hasrec(e, k):
                 sqs.get_queue_by_name(QueueName='node' + str(k)).send_message(MessageBody=m + "," + e.name + "," + str(self.T[self.node][self.node]) + "," + str(self.node))         
 
     def receive(self, sqs):
@@ -82,7 +82,7 @@ class Node:
         m = msg[0].body.split(",")
         
         NE = ""
-        if !self.hasrec(m[1], self.node)
+        if !self.hasrec(m[1], self.node):
             NE = m[1]
         #for item in self.V[:]:
             
