@@ -32,6 +32,7 @@ class Node:
         print()
 
         print("Partial Log")
+        print("operation, event, T, node")
         for item in self.PL:
             print(item, end=' ')
         print()
@@ -73,18 +74,17 @@ class Node:
         for item in self.PL:
             s = item.split(",")
             if e.name == s[1] and !self.hasrec(e, k)
-                sqs.get_queue_by_name(QueueName='node' + str(k)).send_message(MessageBody=m)         
+                sqs.get_queue_by_name(QueueName='node' + str(k)).send_message(MessageBody=m + "," + e.name + "," + str(self.T[self.node][self.node]) + "," + str(self.node))         
 
     def receive(self, sqs):
-        q = boto3.resource('sqs')       
-        if self.node == 0:
-            q = sqs.get_queue_by_name(QueueName='node0')
-        elif self.node == 1:
-            q = sqs.get_queue_by_name(QueueName='node1')
-        else:
-            print("I don't have a queue!")
-
+        q = sqs.get_queue_by_name(QueueName='node' + str(self.node))
         msg = q.receive_messages()
-        for message in msg:
-            print(message.body)
+        m = msg[0].body.split(",")
+        
+        NE = ""
+        if !self.hasrec(m[1], self.node)
+            NE = m[1]
+        
+
+        
 
