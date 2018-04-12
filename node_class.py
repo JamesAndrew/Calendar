@@ -79,7 +79,8 @@ class Node:
     def receive(self, sqs):
         q = sqs.get_queue_by_name(QueueName='node' + str(self.node))
         msg = q.receive_messages()
-        m = msg[0].body.split(",")
+        m = msg[0].body
+        print(m)
         
         NE = ""
         if not self.hasrec(m[1], self.node):
