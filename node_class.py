@@ -43,11 +43,12 @@ class Node:
     def get_time(self):
         return self.clock
 
-    def hasrec(self, e, k):
+    def hasrec(self, t, e, k):
         n = int(e.node)
         print(n)
-        print(self.T[k][n] >= int(e.time))
-        return self.T[k][n] >= int(e.time)
+        p = (4*k) + 1
+        print(p[t] >= int(e.time))
+        return p[t] >= int(e.time)
 
     def advance_clock(self):
         self.clock += 1
@@ -74,11 +75,16 @@ class Node:
                 return False
 
     def send(self, sqs, k, m, e):
-        print(self.hasrec(e, k))
+        table = ""
+        for row in self.T:
+            for elem in row:
+                table + elem
+                
         for item in self.PL:
             s = item.split(",")
-            if (e.name == s[1]) and (self.hasrec(e, k) == False):
-                sqs.get_queue_by_name(QueueName='node' + str(k)).send_message(MessageBody=m + "," + e.name + "," + str(self.T[self.node][self.node]) + "," + str(self.node))         
+            if (e.name == s[1]) and (self.hasrec(table, e, k) == False):
+                sqs.get_queue_by_name(QueueName='node' + str(k)).send_message(MessageBody=m + "," + e.name \
+                    + "," + str(self.T[self.node][self.node]) + "," + str(self.node) + "," + table)         
 
     def receive(self, sqs):
         q = sqs.get_queue_by_name(QueueName='node' + str(self.node))
