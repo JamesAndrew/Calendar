@@ -44,11 +44,11 @@ class Node:
         return self.clock
 
     def hasrec(self, t, e, k):
-        n = int(e.node)
-        print(n)
-        p = (4*k) + 1
-        print(p[t] >= int(e.time))
-        return p[t] >= int(e.time)
+        n = e.get_node()
+        p = ((4*k)-1) + n
+        print(p)
+        print(int(t[p]) >= int(e.time))
+        return int(t[p]) >= int(e.time)
 
     def advance_clock(self):
         self.clock += 1
@@ -78,7 +78,8 @@ class Node:
         table = ""
         for row in self.T:
             for elem in row:
-                table + elem
+                table = table + str(elem)
+        print(table)
                 
         for item in self.PL:
             s = item.split(",")

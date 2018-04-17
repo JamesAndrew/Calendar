@@ -32,7 +32,7 @@ while loop:
         
     elif option == "1":
         print("schedule")
-        e = event_class.Event(n.get_node_id)
+        e = event_class.Event(n.get_node_id())
         n.insert(sqs, e)
         e.set_time = n.get_time()
         c.schedule(e)
@@ -52,4 +52,3 @@ while loop:
         print("invalid option, please try again")
 
     n.node_properties()
-    n.receive(sqs)

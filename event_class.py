@@ -16,7 +16,7 @@ class Event:
         self.end = int(input("end time?"))
         parts = input("more than 1 person y/n?")
         if parts == 'y':
-            self.part.append(input("which node?"))
+            self.part.append(int(input("which node?")))
 
     def set_time(self, time):
         self.time = time
