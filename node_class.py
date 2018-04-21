@@ -27,8 +27,9 @@ class Node:
             print()
 
         print("Dictionary")
+        print("name day start - end")
         for item in self.V:
-            print(item, end=' ')
+            item.display_event()
         print()
 
         print("Partial Log")
@@ -54,13 +55,19 @@ class Node:
         self.clock += 1
         return self.clock
 
-    def insert(self, sqs, x):        
-        self.T[self.node][self.node] = self.advance_clock()
-        self.PL.append("insert," + x.name + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
-        self.V.append(x)
+    def insert(self, sqs, x):
+        for item in self.V[:]:
+            if item.name == x.name:
+                print("Appointment already exists")
+            else:
+                self.T[self.node][self.node] = self.advance_clock()
+                self.PL.append("insert," + x.name + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
+                self.V.append(x)
 
-        if len(x.part) > 0:
-            self.send(sqs, x.part[0], "schedule", x)
+                if len(x.part) > 0:
+                    self.send(sqs, x.part[0], "schedule", x)
+            
+        
 
     def delete(self, x):
         self.T[self.node][self.node] = self.advance_clock()
@@ -90,13 +97,21 @@ class Node:
     def receive(self, sqs):
         q = sqs.get_queue_by_name(QueueName='node' + str(self.node))
         msg = q.receive_messages()
-        m = msg[0].body
-        print(m)
-        
-        NE = ""
-        if not self.hasrec(m[1], self.node):
-            NE = m[1]
-        #for item in self.V[:]:
+        if msg.length > 0:
+            m = msg[0].body.split
+            print(m)
+            
+            NE = ""
+            v = False
+            if not self.hasrec(m[1], self.node):
+                NE = m[1]
+                  
+            if NE != "delete":
+                for item in self.V[:]:
+                    if item.name == m[1]:
+                        v = True
+                if v or NE == m[1]:
+                    self.PL.append("delete,")
             
 
         

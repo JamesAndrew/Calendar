@@ -24,7 +24,8 @@ while loop:
     print("0 - quit")
     print("1 - schedule appointment")
     print("2 - display calendar")
-    print("3 - cancel appointment")
+    print("3 - check messages")
+    print("4 - cancel appointment")
 
     option = input("which option?")
     if option == "0":
@@ -40,8 +41,12 @@ while loop:
     elif option == "2":
         print("display")
         c.display()
-        
+
     elif option == "3":
+        print("checking messages")
+        n.receive(sqs)
+        
+    elif option == "4":
         print("cancel")
         delete = input("name of appointment to delete")
         d = n.delete(delete)
