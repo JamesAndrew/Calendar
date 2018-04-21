@@ -49,7 +49,7 @@ class Node:
 
     def hasrec(self, t, e, k):
         n = e.get_node()
-        p = ((4*k)-1) + n
+        p = ((4*k)) + n
         print(p)
         print(int(t[p]) >= int(e.time))
         return int(t[p]) >= int(e.time)
@@ -64,17 +64,19 @@ class Node:
         self.V.append(x)
 
         if len(x.part) > 0:
-            self.send(sqs, x.part[0], "schedule", x)
+            self.send(sqs, x.part[0], "delete", x)
             
         
 
     def delete(self, x):
         self.T[self.node][self.node] = self.advance_clock()
-        self.PL.append("delete," + x.name + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
+        self.PL.append("delete," + x.name + "," + )
         for item in self.V[:]:
             if item.name == x:
                 self.V.remove(item)
                 print(x + " deleted")
+                if len(x.part) > 0:
+                    self.send(sqs, x.part[0], "schedule", x)
                 return item
             else:
                 print("Appointment not found")
@@ -93,22 +95,43 @@ class Node:
     def receive(self, sqs):
         q = sqs.get_queue_by_name(QueueName='node' + str(self.node))
         msg = q.receive_messages()
-        if len(msg) > 0:
-            m = msg[0].body.split
-            print(m)
+        m = msg[0].body.split
+        print(m)
+
+        tk = []
+        n = 4
+        m = 4
+        for i in range(n):
+            column = []
+            for j in range(m):
+                column.append(0)
+            tk.append(column)
             
-            NE = ""
-            v = False
-            if not self.hasrec(m[1], self.node):
-                NE = m[1]
-                  
-            if NE != "delete":
-                for item in self.V[:]:
-                    if item.name == m[1]:
-                        v = True
-                if v or NE == m[1]:
-                    self.PL.append("delete,")
-            
+        for row in tk:
+            for elem in row:
+                p = ((4*row)) + elem
+                elem = m[4][p]
+        
+        NE = ""
+        v = False
+        if not self.hasrec(m[1], self.node):
+            NE = m[1]
+              
+        if m[0] != "delete":
+            for item in self.V[:]:
+                if item.name == m[1]:
+                    v = True
+            if v or NE == m[1]:
+                self.PL.append("delete,")
+
+        for i in range(0, 4):
+            self.T[self.node][i] = max(self.T[self.node][i], tk[m[3]][i])
+
+        for i in range(0, 4):
+            for j in range(0, 4):
+                self.T[i][j] = max(self.T[i][j], tk[i][j])
+
+        self.PL.append(m[0] + "," + m[1] + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
 
         
 
