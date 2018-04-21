@@ -56,16 +56,12 @@ class Node:
         return self.clock
 
     def insert(self, sqs, x):
-        for item in self.V[:]:
-            if item.name == x.name:
-                print("Appointment already exists")
-            else:
-                self.T[self.node][self.node] = self.advance_clock()
-                self.PL.append("insert," + x.name + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
-                self.V.append(x)
+        self.T[self.node][self.node] = self.advance_clock()
+        self.PL.append("insert," + x.name + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
+        self.V.append(x)
 
-                if len(x.part) > 0:
-                    self.send(sqs, x.part[0], "schedule", x)
+        if len(x.part) > 0:
+            self.send(sqs, x.part[0], "schedule", x)
             
         
 
