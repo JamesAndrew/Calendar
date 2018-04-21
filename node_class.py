@@ -70,7 +70,7 @@ class Node:
 
     def delete(self, x):
         self.T[self.node][self.node] = self.advance_clock()
-        self.PL.append("delete," + x.name + "," + )
+        self.PL.append("delete," + x.name + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
         for item in self.V[:]:
             if item.name == x:
                 self.V.remove(item)
