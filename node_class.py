@@ -1,5 +1,8 @@
 import boto3
 
+# use sqs service
+sqs = boto3.resource('sqs')
+
 class Node:
     node = 0
     clock = 0
@@ -67,7 +70,7 @@ class Node:
 
     def delete(self, x):
         self.T[self.node][self.node] = self.advance_clock()
-        self.PL.append("delete," + x + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
+        self.PL.append("delete," + x.name + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
         for item in self.V[:]:
             if item.name == x:
                 self.V.remove(item)
@@ -84,16 +87,13 @@ class Node:
                 table = table + str(elem)
         print(table)
                 
-        for item in self.PL:
-            s = item.split(",")
-            if (e.name == s[1]) and (self.hasrec(table, e, k) == False):
-                sqs.get_queue_by_name(QueueName='node' + str(k)).send_message(MessageBody=m + "," + e.name \
-                    + "," + str(self.T[self.node][self.node]) + "," + str(self.node) + "," + table)         
+        sqs.get_queue_by_name(QueueName='node' + str(k)).send_message(MessageBody=m + "," + e.name \
+            + "," + str(self.T[self.node][self.node]) + "," + str(self.node) + "," + table)         
 
     def receive(self, sqs):
         q = sqs.get_queue_by_name(QueueName='node' + str(self.node))
         msg = q.receive_messages()
-        if msg.length > 0:
+        if len(msg) > 0:
             m = msg[0].body.split
             print(m)
             
