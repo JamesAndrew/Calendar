@@ -106,7 +106,8 @@ class Node:
             for j in range(m):
                 column.append(0)
             tk.append(column)
-            
+
+        p = 0
         for row in tk:
             for elem in row:
                 p = ((4*row)) + elem
