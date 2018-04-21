@@ -133,5 +133,5 @@ class Node:
 
         self.PL.append(m[0] + "," + m[1] + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
 
-        
+        msg[0].delete_message()
 
