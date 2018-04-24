@@ -70,13 +70,11 @@ class Node:
 
     def delete(self, x):
         self.T[self.node][self.node] = self.advance_clock()
-        self.PL.append("delete," + x.name + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
+        self.PL.append("delete," + x + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
         for item in self.V[:]:
             if item.name == x:
                 self.V.remove(item)
                 print(x + " deleted")
-                if len(x.part) > 0:
-                    self.send(sqs, x.part[0], "delete", x)
                 return item
             else:
                 print("Appointment not found")
