@@ -118,11 +118,11 @@ class Node:
             self.PL.append('insert,' + me[1] + "," + me[2] + "," + me[3])
 
         for i in range(0, 4):
-            self.T[self.node][i] = max(self.T[self.node][i], tk[int(me[3])][i])
+            self.T[self.node][i] = max(int(self.T[self.node][i]), tk[int(me[3])][i])
 
         for i in range(0, 4):
             for j in range(0, 4):
-                self.T[i][j] = max(self.T[i][j], tk[i][j])
+                self.T[i][j] = max(int(self.T[i][j]), int(tk[i][j]))
 
         msg[0].delete_message()
 
