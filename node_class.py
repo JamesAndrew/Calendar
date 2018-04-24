@@ -127,9 +127,7 @@ class Node:
 
         for i in range(0, 4):
             for j in range(0, 4):
-                self.T[i][j] = max(self.T[i][j], tk[i][j])
-
-        self.PL.append(me[0] + "," + me[1] + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
+                self.T[i][j] = max(self.T[i][j], tk[i][j]))
 
         msg[0].delete_message()
 
