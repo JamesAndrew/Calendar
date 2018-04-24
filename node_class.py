@@ -110,6 +110,7 @@ class Node:
         p = 0
         for row in tk:
             for elem in row:
+                print(elem)
                 p = ((4*row)) + elem
                 elem = me[4][p]
         
