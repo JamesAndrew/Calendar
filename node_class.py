@@ -123,6 +123,3 @@ class Node:
         for i in range(0, 4):
             for j in range(0, 4):
                 self.T[i][j] = max(int(self.T[i][j]), int(tk[i][j]))
-
-        q.delete_message(msg[0])
-
