@@ -112,23 +112,15 @@ class Node:
         for i in range(0, 4):
             for j in range(0, 4):
                 p = ((4*i)) + j
-                print(str(i) + " " + str(j) + " " + str(p))
-                print(str(tab[p]))
-                print(str(tk[i][j]))
-                
                 tk[i][j] = tab[p]
         
         NE = ""
         v = False
-        if not self.hasrec(me[1], self.node):
+        if not self.hasrec(tab, me[self.node):
             NE = me[1]
               
-        if me[0] != "delete":
-            for item in self.V[:]:
-                if item.name == me[1]:
-                    v = True
-            if v or NE == me[1]:
-                self.PL.append("delete,")
+        if me[0] == 'insert'
+            PL.append('insert,' + me[1] + "," + me[2] + "," + me[3])
 
         for i in range(0, 4):
             self.T[self.node][i] = max(self.T[self.node][i], tk[me[3]][i])
