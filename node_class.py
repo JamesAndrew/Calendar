@@ -104,7 +104,7 @@ class Node:
         for i in range(16):
             tk.append(0)
 
-        tab = me[4]
+        tab = str(me[4])
         p = 0
         for i in range(n):
             for j in range(m):
