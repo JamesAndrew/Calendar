@@ -104,6 +104,7 @@ class Node:
         for i in range(16):
             tk.append(0)
 
+        print(me[4])
         p = 0
         for i in range(n):
             for j in range(m):
