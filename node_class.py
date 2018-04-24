@@ -101,8 +101,11 @@ class Node:
         tk = []
         n = 4
         m = 4
-        for i in range(16):
-            tk.append(0)
+        for i in range(n):
+            column = []
+            for j in range(m):
+                column.append(0)
+            self.T.append(column)
 
         tab = str(me[4])
         p = 0
