@@ -118,7 +118,7 @@ class Node:
             self.PL.append('insert,' + me[1] + "," + me[2] + "," + me[3])
 
         for i in range(0, 4):
-            self.T[self.node][i] = max(self.T[self.node][i], tk[me[3]][i])
+            self.T[self.node][i] = max(self.T[self.node][i], tk[int(me[3])][i])
 
         for i in range(0, 4):
             for j in range(0, 4):
