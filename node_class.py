@@ -119,7 +119,7 @@ class Node:
         if not self.hasrec(tab, me[self.node):
             NE = me[1]
               
-        if me[0] == 'insert'
+        if me[0] == 'insert':
             PL.append('insert,' + me[1] + "," + me[2] + "," + me[3])
 
         for i in range(0, 4):
