@@ -112,6 +112,7 @@ class Node:
         for i in range(0, 4):
             for j in range(0, 4):
                 p = ((4*i)) + j
+                print(str(i) + " " + str(j) + " " + str(p))
                 tk[i][j] = tab[p]
         
         NE = ""
