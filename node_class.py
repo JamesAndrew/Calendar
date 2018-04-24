@@ -109,8 +109,8 @@ class Node:
 
         tab = str(me[4])
         p = 0
-        for i in range(n):
-            for j in range(m):
+        for i in range(0, 4):
+            for j in range(0, 4):
                 p = ((4*i)) + j
                 tk[i][j] = tab[p]
         
