@@ -90,7 +90,7 @@ class Node:
         sqs.get_queue_by_name(QueueName='node' + str(k)).send_message(MessageBody=m + "," + e.name \
             + "," + str(self.T[self.node][self.node]) + "," + str(self.node) + "," + table \
             + "," + e.day + "," + str(e.start) + "," + str(e.end))         
-
+t
     def receive(self, sqs):
         q = sqs.get_queue_by_name(QueueName='node' + str(self.node))
         msg = q.receive_messages()
