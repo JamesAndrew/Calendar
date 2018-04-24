@@ -115,7 +115,7 @@ class Node:
                 tk[i][j] = tab[p]
               
         if me[0] == 'insert':
-            PL.append('insert,' + me[1] + "," + me[2] + "," + me[3])
+            self.PL.append('insert,' + me[1] + "," + me[2] + "," + me[3])
 
         for i in range(0, 4):
             self.T[self.node][i] = max(self.T[self.node][i], tk[me[3]][i])
