@@ -101,18 +101,14 @@ class Node:
         tk = []
         n = 4
         m = 4
-        for i in range(n):
-            column = []
-            for j in range(m):
-                column.append(0)
-            tk.append(column)
+        for i in range(16):
+            tk.append(0)
 
         p = 0
-        for row in tk:
-            for elem in row:
-                print(elem)
-                p = ((4*row)) + elem
-                elem = me[4][p]
+        for i in range(n):
+            for j in range(m):
+                p = ((4*i)) + j
+                tk[i][j] = me[4][p] 
         
         NE = ""
         v = False
