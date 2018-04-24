@@ -105,7 +105,7 @@ class Node:
             column = []
             for j in range(m):
                 column.append(0)
-            self.T.append(column)
+            self.tk.append(column)
 
         tab = str(me[4])
         p = 0
