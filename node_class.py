@@ -95,7 +95,7 @@ class Node:
     def receive(self, sqs):
         q = sqs.get_queue_by_name(QueueName='node' + str(self.node))
         msg = q.receive_messages()
-        me = msg[0].body.split
+        me = msg[0].body.split(',')
         print(me)
 
         tk = []
@@ -104,13 +104,11 @@ class Node:
         for i in range(16):
             tk.append(0)
 
-        tab = ''
-        tab = me[4]
         p = 0
         for i in range(n):
             for j in range(m):
                 p = ((4*i)) + j
-                tk[i][j] = tab[p]
+                tk[i][j] = me[4][p]
         
         NE = ""
         v = False
