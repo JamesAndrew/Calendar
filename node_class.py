@@ -122,7 +122,7 @@ class Node:
 
         for i in range(0, 4):
             for j in range(0, 4):
-                self.T[i][j] = max(self.T[i][j], tk[i][j]))
+                self.T[i][j] = max(self.T[i][j], tk[i][j])
 
         msg[0].delete_message()
 
