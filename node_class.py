@@ -32,7 +32,7 @@ class Node:
         print("Dictionary")
         print("name day start - end")
         for item in self.V:
-            item.display_event()
+            print(item)
         print()
 
         print("Partial Log")
