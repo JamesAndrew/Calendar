@@ -113,11 +113,6 @@ class Node:
             for j in range(0, 4):
                 p = ((4*i)) + j
                 tk[i][j] = tab[p]
-        
-        NE = ""
-        v = False
-        if not self.hasrec(tab, me[self.node):
-            NE = me[1]
               
         if me[0] == 'insert':
             PL.append('insert,' + me[1] + "," + me[2] + "," + me[3])
