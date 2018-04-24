@@ -96,7 +96,7 @@ class Node:
         q = sqs.get_queue_by_name(QueueName='node' + str(self.node))
         msg = q.receive_messages()
         me = msg[0].body.split
-        print(m)
+        print(me)
 
         tk = []
         n = 4
