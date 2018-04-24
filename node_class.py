@@ -108,7 +108,7 @@ class Node:
         for i in range(n):
             for j in range(m):
                 p = ((4*i)) + j
-                tk[i][j] = me[4][p] 
+                tk[i][j] = str(me[4])[p] 
         
         NE = ""
         v = False
