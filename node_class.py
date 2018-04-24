@@ -76,7 +76,7 @@ class Node:
                 self.V.remove(item)
                 print(x + " deleted")
                 if len(x.part) > 0:
-                    self.send(sqs, x.part[0], "schedule", x)
+                    self.send(sqs, x.part[0], "delete", x)
                 return item
             else:
                 print("Appointment not found")
@@ -114,8 +114,7 @@ class Node:
                 p = ((4*i)) + j
                 tk[i][j] = tab[p]
               
-        if me[0] == 'insert':
-            self.PL.append('insert,' + me[1] + "," + me[2] + "," + me[3])
+        self.PL.append(me[0] + "," + me[1] + "," + me[2] + "," + me[3])        
 
         for i in range(0, 4):
             self.T[self.node][i] = max(int(self.T[self.node][i]), int(tk[int(me[3])][i]))
