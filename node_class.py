@@ -104,11 +104,13 @@ class Node:
         for i in range(16):
             tk.append(0)
 
+        tab = ''
+        tab = me[4]
         p = 0
         for i in range(n):
             for j in range(m):
                 p = ((4*i)) + j
-                tk[i][j] = str(me[4])[p] 
+                tk[i][j] = tab[p]
         
         NE = ""
         v = False
