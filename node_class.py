@@ -95,7 +95,7 @@ class Node:
     def receive(self, sqs):
         q = sqs.get_queue_by_name(QueueName='node' + str(self.node))
         msg = q.receive_messages()
-        m = msg[0].body.split
+        me = msg[0].body.split
         print(m)
 
         tk = []
@@ -111,28 +111,28 @@ class Node:
         for row in tk:
             for elem in row:
                 p = ((4*row)) + elem
-                elem = m[4][p]
+                elem = me[4][p]
         
         NE = ""
         v = False
-        if not self.hasrec(m[1], self.node):
-            NE = m[1]
+        if not self.hasrec(me[1], self.node):
+            NE = me[1]
               
         if m[0] != "delete":
             for item in self.V[:]:
-                if item.name == m[1]:
+                if item.name == me[1]:
                     v = True
-            if v or NE == m[1]:
+            if v or NE == me[1]:
                 self.PL.append("delete,")
 
         for i in range(0, 4):
-            self.T[self.node][i] = max(self.T[self.node][i], tk[m[3]][i])
+            self.T[self.node][i] = max(self.T[self.node][i], tk[me[3]][i])
 
         for i in range(0, 4):
             for j in range(0, 4):
                 self.T[i][j] = max(self.T[i][j], tk[i][j])
 
-        self.PL.append(m[0] + "," + m[1] + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
+        self.PL.append(me[0] + "," + me[1] + "," + str(self.T[self.node][self.node]) + "," + str(self.node))
 
         msg[0].delete_message()
 
