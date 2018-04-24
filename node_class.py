@@ -64,7 +64,7 @@ class Node:
         self.V.append(x)
 
         if len(x.part) > 0:
-            self.send(sqs, x.part[0], "delete", x)
+            self.send(sqs, x.part[0], "insert", x)
             
         
 
@@ -115,7 +115,7 @@ class Node:
         if not self.hasrec(me[1], self.node):
             NE = me[1]
               
-        if m[0] != "delete":
+        if me[0] != "delete":
             for item in self.V[:]:
                 if item.name == me[1]:
                     v = True
