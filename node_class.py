@@ -90,7 +90,8 @@ class Node:
         print(table)
                 
         sqs.get_queue_by_name(QueueName='node' + str(k)).send_message(MessageBody=m + "," + e.name \
-            + "," + str(self.T[self.node][self.node]) + "," + str(self.node) + "," + table)         
+            + "," + str(self.T[self.node][self.node]) + "," + str(self.node) + "," + table \
+            + "," e.day + "," + e.start + "," + e.end)         
 
     def receive(self, sqs):
         q = sqs.get_queue_by_name(QueueName='node' + str(self.node))
@@ -114,7 +115,12 @@ class Node:
                 p = ((4*i)) + j
                 tk[i][j] = tab[p]
               
-        self.PL.append(me[0] + "," + me[1] + "," + me[2] + "," + me[3])        
+        self.PL.append(me[0] + "," + me[1] + "," + me[2] + "," + me[3])
+
+        if me[0] == "insert":
+            self.V.append(me[1] + "," + me[5] + "," + me[6] + "," + me[7])
+        #elif me[0] == "delete":
+            
 
         for i in range(0, 4):
             self.T[self.node][i] = max(int(self.T[self.node][i]), int(tk[int(me[3])][i]))
