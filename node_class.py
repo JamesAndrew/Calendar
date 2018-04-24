@@ -113,8 +113,9 @@ class Node:
             for j in range(0, 4):
                 p = ((4*i)) + j
                 print(str(i) + " " + str(j) + " " + str(p))
-                print(str(tk[i][j]))
                 print(str(tab[p]))
+                print(str(tk[i][j]))
+                
                 tk[i][j] = tab[p]
         
         NE = ""
